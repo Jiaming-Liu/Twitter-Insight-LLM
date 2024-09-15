@@ -13,7 +13,7 @@ Stay tuned for more updates!
 
 
 
-## (new!) Experimental Embedding Based Image Search: Search unlabeled images with nartual language. 
+## (new!) Experimental Embedding Based Image Search: Search unlabeled images with nartural language. 
 A new free image embedding tool with a supporting frontend that does not require GPU support has been added. (Supports multiple languages, although the results are better in English.)
 
 For example, here are the results for a searchon "black cat" (in Chinese) but you can also searchfor "a group of people in a photo," "workflow graphs," or more abstract concepts like "sadness."
@@ -100,6 +100,78 @@ The project includes sample output files for reference:
 - `sample_exported_excel.xlsx`: A sample Excel file exported from the JSON data.
 
 Feel free to explore and modify the code to suit your specific data analysis requirements.
+
+## Running the FastAPI Server
+
+To run the FastAPI server and use the new API endpoints, follow these steps:
+
+1. Install the required dependencies by running the following command:
+
+   ```
+   pip install fastapi uvicorn
+   ```
+
+2. Start the FastAPI server by executing the following command:
+
+   ```
+   uvicorn twitter_extractor_api:app --reload
+   ```
+
+3. The server will start running at `http://127.0.0.1:8000`. You can access the API documentation at `http://127.0.0.1:8000/docs`.
+
+## Usage Examples for the New API Endpoints
+
+### Set Token
+
+Endpoint: `POST /set_token`
+
+Request Body:
+```json
+{
+  "token": "YOUR_TWITTER_AUTH_TOKEN_HERE"
+}
+```
+
+Response:
+```json
+{
+  "message": "Token set successfully"
+}
+```
+
+### Fetch Tweets
+
+Endpoint: `POST /fetch_tweets`
+
+Request Body:
+```json
+{
+  "page_url": "https://twitter.com/elonmusk/likes",
+  "start_date": "2024-03-01",
+  "end_date": "2024-03-02"
+}
+```
+
+Response:
+```json
+[
+  {
+    "text": "Sample tweet text",
+    "author_name": "Elon Musk",
+    "author_handle": "@elonmusk",
+    "date": "2024-03-01",
+    "lang": "en",
+    "url": "https://twitter.com/elonmusk/status/1234567890",
+    "mentioned_urls": ["https://example.com"],
+    "is_retweet": false,
+    "media_type": "Image",
+    "images_urls": ["https://example.com/image.jpg"],
+    "num_reply": 10,
+    "num_retweet": 5,
+    "num_like": 20
+  }
+]
+```
 
 ## FAQs:
 
